@@ -1,3 +1,3 @@
-from matchday.service_objects.league import League
+from matchday.service_objects.match_record_parser import MatchRecordParser
 
-__all__ = ("League")
+__all__ = ("MatchRecordParser")
