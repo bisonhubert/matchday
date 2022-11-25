@@ -1,4 +1,5 @@
 from __future__ import annotations
+import re
 from typing import List, Type
 
 class MatchRecordParser:
@@ -8,6 +9,7 @@ class MatchRecordParser:
 
     def __init__(self, match_record: str) -> None:
         self.match_record = match_record
+        self.is_valid: bool = False
         self.team_1_name: str = None
         self.team_1_goal_count: int = None
         self.team_1_match_points: int = None
@@ -43,6 +45,22 @@ class MatchRecordParser:
         self.team_1_goal_count, self.team_2_goal_count = self._get_team_goal_count(teams)
         self.team_1_match_points, self.team_2_match_points = self._get_match_points()
 
+    def _validate(self) -> bool:
+        regex = re.compile('([a-zA-Z]+\\s)+\\d,\\s{1}([a-zA-Z]+\\s)+\\d(\\n)?')
+        # regex will match with:
+        # one or more of any single character in the range a-z or A-Z
+        # AND any whitespace character
+        # FOLLOWED BY any digit
+        # FOLLOWED BY a comma and a single whitespace
+        # FOLLOWED BY one or more of any single character in the range a-z or A-Z
+        # AND any whitespace character, followed by
+        # FOLLOWED BY any digit
+        # FOLLOWED BY zero or one of a newline character
+        self.is_valid = regex.match(self.match_record) is not None
+
+
     def run(self) -> MatchRecordParser:
-        self._set_attrs()
+        self._validate()
+        if self.is_valid:
+            self._set_attrs()
         return self

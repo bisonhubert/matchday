@@ -1,7 +1,7 @@
 import pytest
 
 from matchday.constants import MATCH_RECORDS, MATCHDAY_RECORDS
-from matchday.service_objects import League
+from matchday.dataclasses import League
 
 def test_initialize_league():
     league = League()
