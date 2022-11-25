@@ -51,7 +51,7 @@ class MatchRecordParser:
     def _validate(self) -> bool:
         regex = re.compile("([a-zA-Z]+\\s)+\\d,\\s{1}([a-zA-Z]+\\s)+\\d(\\n)?")
         # regex will match with:
-        # one or more of any single character in the range a-z or A-Z
+        # >= 1 of any single character in the range a-z or A-Z
         # AND any whitespace character
         # FOLLOWED BY any digit
         # FOLLOWED BY a comma and a single whitespace
