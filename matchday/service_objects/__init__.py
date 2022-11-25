@@ -1,3 +1,3 @@
-from matchday.service_objects.sample import Sample
+from matchday.service_objects.league import League
 
-__all__ = "Sample"
+__all__ = ("League")
