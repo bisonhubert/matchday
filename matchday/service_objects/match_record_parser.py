@@ -2,21 +2,23 @@ from __future__ import annotations
 import re
 from typing import List, Type
 
+from matchday.constants import DRAW, LOSE, WIN
+
 
 class MatchRecordParser:
-    MATCH_POINT_WIN = 3
-    MATCH_POINT_TIE = 1
-    MATCH_POINT_LOSS = 0
-
     def __init__(self, match_record: str) -> None:
         self.match_record = match_record
         self.is_valid: bool = False
         self.team_1_name: str = None
-        self.team_1_goal_count: int = None
-        self.team_1_match_points: int = None
         self.team_2_name: str = None
+        self.team_1_goal_count: int = None
         self.team_2_goal_count: int = None
-        self.team_2_match_points: int = None
+        self.team_1_win_count: int = 0
+        self.team_2_win_count: int = 0
+        self.team_1_lose_count: int = 0
+        self.team_2_lose_count: int = 0
+        self.team_1_draw_count: int = 0
+        self.team_2_draw_count: int = 0
 
     def _split_teams(self) -> List[str]:
         return self.match_record.strip().split(", ")  # split on comma + whitespace
@@ -27,18 +29,16 @@ class MatchRecordParser:
     def _get_team_goal_count(self, teams: List[str]) -> int:
         return [int(team.split(" ")[-1]) for team in teams]
 
-    def _get_match_points(self) -> None:
-        TIE, WIN, LOSS = [
-            [self.MATCH_POINT_TIE] * 2,
-            [self.MATCH_POINT_WIN, self.MATCH_POINT_LOSS],
-            [self.MATCH_POINT_LOSS, self.MATCH_POINT_WIN],
-        ]
+    def _set_team_record(self) -> None:
         if self.team_1_goal_count == self.team_2_goal_count:
-            return TIE
+            self.team_1_draw_count = 1
+            self.team_2_draw_count = 1
         elif self.team_1_goal_count > self.team_2_goal_count:
-            return WIN
+            self.team_1_win_count = 1
+            self.team_2_lose_count = 1
         elif self.team_1_goal_count < self.team_2_goal_count:
-            return LOSS
+            self.team_1_lose_count = 1
+            self.team_2_win_count = 1
 
     def _set_attrs(self) -> None:
         teams = self._split_teams()
@@ -46,7 +46,7 @@ class MatchRecordParser:
         self.team_1_goal_count, self.team_2_goal_count = self._get_team_goal_count(
             teams
         )
-        self.team_1_match_points, self.team_2_match_points = self._get_match_points()
+        self._set_team_record()
 
     def _validate(self) -> bool:
         regex = re.compile("([a-zA-Z]+\\s)+\\d,\\s{1}([a-zA-Z]+\\s)+\\d(\\n)?")
@@ -63,8 +63,18 @@ class MatchRecordParser:
 
     def get_teams(self):
         return [
-            {"name": self.team_1_name, "match_points": self.team_1_match_points},
-            {"name": self.team_2_name, "match_points": self.team_2_match_points},
+            {
+                "name": self.team_1_name,
+                "win_count": self.team_1_win_count,
+                "lose_count": self.team_1_lose_count,
+                "draw_count": self.team_1_draw_count,
+            },
+            {
+                "name": self.team_2_name,
+                "win_count": self.team_2_win_count,
+                "lose_count": self.team_2_lose_count,
+                "draw_count": self.team_2_draw_count,
+            },
         ]
 
     def run(self) -> MatchRecordParser:

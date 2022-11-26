@@ -2,10 +2,13 @@ from dataclasses import dataclass
 from typing import List, Set, Type
 
 
-@dataclass
+@dataclass(order=True)
 class SoccerTeam:
-    points: int
-    name: str
+    points: int = None
+    name: str = None
+    win_count: int = None
+    lose_count: int = None
+    draw_count: int = None
 
 
 @dataclass
