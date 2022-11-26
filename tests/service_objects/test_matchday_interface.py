@@ -172,13 +172,13 @@ def test_matchday_interface_multiple_days(multiple_matchday_records):
     report = interface.matchday.print_report()
     # test that print() gets called when you run print_report()
     assert len(report) == 4
-    # assert report[0] == "Matchday 2\n"
-    # assert report[1] == "Monterey United, 6 pts\n"
-    # assert report[2] == "Capitola Seahorses, 4 pts\n"
-    # assert report[3] == 'Aptos FC, 3 pts'
-    # assert report == [
-    #     "Matchday 2\n",
-    #     "Monterey United, 6 pts\n",
-    #     "Capitola Seahorses, 4 pts\n",
-    #     'Aptos FC, 3 pts'
-    # ]
+    assert report[0] == "Matchday 2\n"
+    assert report[1] == "Capitola Seahorses, 4 pts\n"
+    assert report[2] == "Aptos FC, 3 pts\n"
+    assert report[3] == "Felton Lumberjacks, 3 pts"
+    assert report == [
+        "Matchday 2\n",
+        "Capitola Seahorses, 4 pts\n",
+        "Aptos FC, 3 pts\n",
+        "Felton Lumberjacks, 3 pts",
+    ]

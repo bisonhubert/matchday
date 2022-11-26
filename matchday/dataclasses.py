@@ -24,9 +24,9 @@ class SoccerTeam:
         # from operator import itemgetter
         # params = {'a': 1, 'b': 2}
         # a, b = itemgetter('a', 'b')(params)
-        self.win_count = team.get("win_count")
-        self.lose_count = team.get("lose_count")
-        self.draw_count = team.get("draw_count")
+        self.win_count += team.get("win_count")
+        self.lose_count += team.get("lose_count")
+        self.draw_count += team.get("draw_count")
         return self
 
 

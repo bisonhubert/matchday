@@ -20,16 +20,12 @@ class MatchdayInterface:
 
     def _update_soccer_team(self, team: dict) -> None:
         prev_team_record = self.league.get_team(team.get("name"))
-        team = prev_team_record.update(team)
-        self.matchday.teams.append(team)
+        return prev_team_record.update(team)
 
     def _start_new_matchday(self, teams: List[Type[SoccerTeam]]):
         self.league.add_matchday(self.matchday)
         self.matchday.print_report()
-        if self.matchday.count == 1:
-            soccer_teams = [self._initialize_soccer_team(team) for team in teams]
-        else:
-            soccer_teams = [self._update_soccer_team(team) for team in teams]
+        soccer_teams = [self._update_soccer_team(team) for team in teams]
         self.matchday = Matchday(count=self.matchday.count + 1, teams=soccer_teams)
 
     def add_team(self, team: dict) -> None:
@@ -60,5 +56,6 @@ class MatchdayInterface:
         elif self.matchday.count == 1:
             [self.add_team(team) for team in teams]
         else:
-            [self._update_soccer_team(team) for team in teams]
+            soccer_teams = [self._update_soccer_team(team) for team in teams]
+            self.matchday.teams = [*self.matchday.teams, *soccer_teams]
         return self
