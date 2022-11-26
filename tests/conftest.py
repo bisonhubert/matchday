@@ -2,9 +2,18 @@ import pytest
 
 from matchday import dataclasses
 
-MATCH_RECORD_1 = "San Jose Earthquakes 3, Santa Cruz Slugs 3\n"
-MATCH_RECORD_2 = "Capitola Seahorses 1, Aptos FC 0"
-MATCH_RECORD_3 = "Felton Lumberjacks 0, Monterey United 2"
+
+class Matchday1:
+    MATCH_RECORD_1 = "San Jose Earthquakes 3, Santa Cruz Slugs 3\n"
+    MATCH_RECORD_2 = "Capitola Seahorses 1, Aptos FC 0"
+    MATCH_RECORD_3 = "Felton Lumberjacks 0, Monterey United 2"
+
+
+class Matchday2:
+    MATCH_RECORD_1 = "Felton Lumberjacks 1, Aptos FC 2\n"
+    MATCH_RECORD_2 = "Santa Cruz Slugs 0, Capitola Seahorses 0"
+    MATCH_RECORD_3 = "Monterey United 4, San Jose Earthquakes 2"
+
 
 INVALID_MATCH_RECORD_1 = ""
 INVALID_MATCH_RECORD_2 = "0"
@@ -19,18 +28,48 @@ INVALID_MATCH_RECORD_10 = "Felton Lumberjacks 0,Monterey United 2"
 
 
 @pytest.fixture
+def match_records_1():
+    return [
+        Matchday1.MATCH_RECORD_1,
+        Matchday1.MATCH_RECORD_2,
+        Matchday1.MATCH_RECORD_3,
+    ]
+
+
+@pytest.fixture
+def match_records_2():
+    return [
+        Matchday2.MATCH_RECORD_1,
+        Matchday2.MATCH_RECORD_2,
+        Matchday2.MATCH_RECORD_3,
+    ]
+
+
+@pytest.fixture
+def multiple_matchday_match_records():
+    return [
+        Matchday1.MATCH_RECORD_1,
+        Matchday1.MATCH_RECORD_2,
+        Matchday1.MATCH_RECORD_3,
+        Matchday2.MATCH_RECORD_1,
+        Matchday2.MATCH_RECORD_2,
+        Matchday2.MATCH_RECORD_3,
+    ]
+
+
+@pytest.fixture
 def match_record_1():
-    return MATCH_RECORD_1
+    return Matchday1.MATCH_RECORD_1
 
 
 @pytest.fixture
 def match_record_2():
-    return "Capitola Seahorses 1, Aptos FC 0"
+    return Matchday1.MATCH_RECORD_2
 
 
 @pytest.fixture
 def match_record_3():
-    return "Felton Lumberjacks 0, Monterey United 2"
+    return Matchday1.MATCH_RECORD_3
 
 
 @pytest.fixture

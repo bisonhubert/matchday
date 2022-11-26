@@ -61,6 +61,12 @@ class MatchRecordParser:
         # FOLLOWED BY zero or one of a newline character
         self.is_valid = regex.match(self.match_record) is not None
 
+    def get_teams(self):
+        return [
+            {"name": self.team_1_name, "match_points": self.team_1_match_points},
+            {"name": self.team_2_name, "match_points": self.team_2_match_points},
+        ]
+
     def run(self) -> MatchRecordParser:
         self._validate()
         if self.is_valid:

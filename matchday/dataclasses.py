@@ -15,14 +15,30 @@ class SoccerMatch:
 class SoccerTeam:
     points: int
     name: str
-    record: str
 
 
 @dataclass
 class Matchday:
+    count: int = None
+    teams: List[Type[SoccerTeam]] = None
 
-    # def report(self) -> List[str, ...]:
-    def report(self) -> None:
+    def add_team(self, team: dict) -> None:
+        if self.teams is None:
+            self.teams = []
+        self.teams.append(
+            SoccerTeam(points=team.get("match_points"), name=team.get("name"))
+        )
+
+    def find_team(self, team_name: str) -> Type[SoccerTeam]:
+        if self.teams is None:
+            return None
+        team = next(
+            iter(list(filter(lambda x: x.name == team_name, self.teams)) or []), None
+        )
+        return team
+
+    def print_report(self) -> List[str]:
+        # print("printing matchday report")
         return None
 
 
