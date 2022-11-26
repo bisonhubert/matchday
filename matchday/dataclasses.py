@@ -13,6 +13,10 @@ class Matchday:
     count: int = None
     teams: List[Type[SoccerTeam]] = None
 
+    @property
+    def name(self):
+        return f'Matchday {self.count}'
+
     def add_team(self, team: dict) -> None:
         if self.teams is None:
             self.teams = []
