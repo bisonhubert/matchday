@@ -107,45 +107,57 @@ def test_matchday_interface_3(match_record_3):
     ]
 
 
-# def test_matchday_interface_multiple_teams_1(match_records_1):
-#     interface = MatchdayInterface()
-#     for record in match_records_1:
-#         parser = MatchRecordParser(record).run()
-#         interface.run(parser.get_teams())
-#     assert interface.matchday.name == "Matchday 1"
-#     assert interface.matchday.count == 1
-#     assert len(interface.matchday.teams) == 6
-#     assert len([team.name for team in interface.matchday.teams]) == len(
-#         set([team.name for team in interface.matchday.teams])
-#     )
-#     # assert interface.matchday.print_report() == [
-#     #     "Matchday 1\n",
-#     #     "Monterey United, 3 pts\n",
-#     #     "Felton Lumberjacks, 0 pts",
-#     # ]
-#     # test that print() gets called when you run print_report()
-#
-#
-# def test_matchday_interface_multiple_teams_2(match_records_2):
-#     interface = MatchdayInterface()
-#     for record in match_records_2:
-#         parser = MatchRecordParser(record).run()
-#         interface.run(parser.get_teams())
-#     assert interface.matchday.name == "Matchday 1"
-#     assert interface.matchday.count == 1
-#     assert len(interface.matchday.teams) == 6
-#     assert len([team.name for team in interface.matchday.teams]) == len(
-#         set([team.name for team in interface.matchday.teams])
-#     )
-#     # assert interface.matchday.print_report() == [
-#     #     'Matchday 1\n',
-#     #     'Aptos FC, 3 pts\n',
-#     #     'Monterey United, 3 pts\n',
-#     #     'Capitola Seahorses, 1 pt',
-#     # ]
-#     # test that print() gets called when you run print_report()
-#
-#
+def test_matchday_interface_multiple_teams_1(match_records_1):
+    interface = MatchdayInterface()
+    for record in match_records_1:
+        parser = MatchRecordParser(record).run()
+        interface.run(parser.get_teams())
+    assert interface.matchday.name == "Matchday 1"
+    assert interface.matchday.count == 1
+    assert len(interface.matchday.teams) == 6
+    assert len([team.name for team in interface.matchday.teams]) == len(
+        set([team.name for team in interface.matchday.teams])
+    )
+    report = interface.matchday.print_report()
+    assert len(report) == 4
+    assert report[0] == "Matchday 1\n"
+    assert report[1] == "Capitola Seahorses, 3 pts\n"
+    assert report[2] == "Monterey United, 3 pts\n"
+    assert report[3] == "San Jose Earthquakes, 1 pt"
+    assert report == [
+        "Matchday 1\n",
+        "Capitola Seahorses, 3 pts\n",
+        "Monterey United, 3 pts\n",
+        "San Jose Earthquakes, 1 pt",
+    ]
+
+
+def test_matchday_interface_multiple_teams_2(match_records_2):
+    interface = MatchdayInterface()
+    for record in match_records_2:
+        parser = MatchRecordParser(record).run()
+        interface.run(parser.get_teams())
+    assert interface.matchday.name == "Matchday 1"
+    assert interface.matchday.count == 1
+    assert len(interface.matchday.teams) == 6
+    assert len([team.name for team in interface.matchday.teams]) == len(
+        set([team.name for team in interface.matchday.teams])
+    )
+    report = interface.matchday.print_report()
+    # test that print() gets called when you run print_report()
+    assert len(report) == 4
+    assert report[0] == "Matchday 1\n"
+    assert report[1] == 'Aptos FC, 3 pts\n'
+    assert report[2] == "Monterey United, 3 pts\n"
+    assert report[3] == 'Capitola Seahorses, 1 pt'
+    assert report == [
+        "Matchday 1\n",
+        'Aptos FC, 3 pts\n',
+        "Monterey United, 3 pts\n",
+        'Capitola Seahorses, 1 pt',
+    ]
+
+
 # def test_matchday_interface_multiple_days(multiple_matchday_match_records):
 #     interface = MatchdayInterface()
 #     for record in multiple_matchday_match_records:

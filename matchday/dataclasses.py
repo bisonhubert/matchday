@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from operator import attrgetter
 from typing import List, Set, Type
 
 
@@ -28,8 +29,8 @@ class Matchday:
         """
         Teams are ranked by points, descending. If points are tied, order by team name asc.
         """
-        # import pdb;pdb.set_trace()
-        return sorted(self.teams, key=lambda x: x.points, reverse=True)
+        teams = sorted(self.teams, key=attrgetter('name'))
+        return sorted(teams, key=attrgetter('points'), reverse=True)
 
     def _get_full_report(self):
         report = [f"{self.name}\n"]
