@@ -46,7 +46,7 @@ def match_records_2():
 
 
 @pytest.fixture
-def multiple_matchday_match_records():
+def multiple_matchday_records():
     return [
         Matchday1.MATCH_RECORD_1,
         Matchday1.MATCH_RECORD_2,

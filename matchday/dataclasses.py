@@ -1,3 +1,4 @@
+from __future__ import annotations
 from dataclasses import dataclass
 from operator import attrgetter
 from typing import List, Set, Type
@@ -19,6 +20,15 @@ class SoccerTeam:
         unit = "pt" if self.points == 1 else "pts"
         return f"{self.name}, {self.points} {unit}"
 
+    def update(self, team: dict) -> SoccerTeam:
+        # from operator import itemgetter
+        # params = {'a': 1, 'b': 2}
+        # a, b = itemgetter('a', 'b')(params)
+        self.win_count = team.get("win_count")
+        self.lose_count = team.get("lose_count")
+        self.draw_count = team.get("draw_count")
+        return self
+
 
 @dataclass
 class Matchday:
@@ -29,8 +39,8 @@ class Matchday:
         """
         Teams are ranked by points, descending. If points are tied, order by team name asc.
         """
-        teams = sorted(self.teams, key=attrgetter('name'))
-        return sorted(teams, key=attrgetter('points'), reverse=True)
+        teams = sorted(self.teams, key=attrgetter("name"))
+        return sorted(teams, key=attrgetter("points"), reverse=True)
 
     def _get_full_report(self):
         report = [f"{self.name}\n"]
@@ -44,19 +54,6 @@ class Matchday:
 
     def format_ranked_teams(self) -> List[str]:
         return [f"{team.matchday_report}\n" for team in self._rank_matchday_teams()]
-
-    # todobison initialize_team vs update_team
-    def add_team(self, team: dict) -> None:
-        if self.teams is None:
-            self.teams = []
-        self.teams.append(
-            SoccerTeam(
-                name=team.get("name"),
-                win_count=team.get("win_count"),
-                lose_count=team.get("lose_count"),
-                draw_count=team.get("draw_count"),
-            )
-        )
 
     def find_team(self, team_name: str) -> Type[SoccerTeam]:
         if self.teams is None:
