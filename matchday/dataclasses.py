@@ -3,15 +3,6 @@ from typing import List, Set, Type
 
 
 @dataclass
-class SoccerMatch:
-    """
-    Class for recording a soccer match
-    """
-
-    original_record: str
-
-
-@dataclass
 class SoccerTeam:
     points: int
     name: str

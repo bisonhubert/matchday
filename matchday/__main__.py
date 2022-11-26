@@ -1,6 +1,4 @@
 import sys
-from matchday.dataclasses import SoccerMatch
-from matchday.service_objects import Sample
 
 
 def handle_stdin():
@@ -23,12 +21,6 @@ def main():
         print("input as a filepath")
         filepath = args[0]
         handle_filepath(filepath)
-
-    match = SoccerMatch(original_record="original record")
-    print("match", match)
-
-    sample = Sample()
-    print("sample", sample)
 
 
 if __name__ == "__main__":

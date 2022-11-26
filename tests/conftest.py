@@ -86,10 +86,3 @@ def invalid_match_records():
         INVALID_MATCH_RECORD_9,
         INVALID_MATCH_RECORD_10,
     ]
-
-
-@pytest.fixture
-def soccer_match():
-    return dataclasses.SoccerMatch(
-        original_record="San Jose Earthquakes 3, Santa Cruz Slugs 3\n"
-    )
