@@ -87,23 +87,23 @@ def test_matchday_interface_3(match_record_3):
     assert len([team.name for team in interface.matchday.teams]) == len(
         set([team.name for team in interface.matchday.teams])
     )
-    assert interface.matchday.teams[0].win_count == 0
-    assert interface.matchday.teams[0].lose_count == 1
+    assert interface.matchday.teams[0].win_count == 1
+    assert interface.matchday.teams[0].lose_count == 0
     assert interface.matchday.teams[0].draw_count == 0
-    assert interface.matchday.teams[0].points == 0
-    assert interface.matchday.teams[1].win_count == 1
-    assert interface.matchday.teams[1].lose_count == 0
+    assert interface.matchday.teams[0].points == 3
+    assert interface.matchday.teams[1].win_count == 0
+    assert interface.matchday.teams[1].lose_count == 1
     assert interface.matchday.teams[1].draw_count == 0
-    assert interface.matchday.teams[1].points == 3
+    assert interface.matchday.teams[1].points == 0
     report = interface.matchday.print_report()
     assert len(report) == 3
     assert report[0] == "Matchday 1\n"
-    assert report[1] == "Monterey United, 3 pts\n"
-    assert report[2] == "Felton Lumberjacks, 0 pts"
+    assert report[1] == "Felton Lumberjacks, 3 pts\n"
+    assert report[2] == "Monterey United, 0 pts"
     assert report == [
         "Matchday 1\n",
-        "Monterey United, 3 pts\n",
-        "Felton Lumberjacks, 0 pts",
+        "Felton Lumberjacks, 3 pts\n",
+        "Monterey United, 0 pts",
     ]
 
 
@@ -122,12 +122,12 @@ def test_matchday_interface_multiple_teams_1(match_records_1):
     assert len(report) == 4
     assert report[0] == "Matchday 1\n"
     assert report[1] == "Capitola Seahorses, 3 pts\n"
-    assert report[2] == "Monterey United, 3 pts\n"
+    assert report[2] == "Felton Lumberjacks, 3 pts\n"
     assert report[3] == "San Jose Earthquakes, 1 pt"
     assert report == [
         "Matchday 1\n",
         "Capitola Seahorses, 3 pts\n",
-        "Monterey United, 3 pts\n",
+        "Felton Lumberjacks, 3 pts\n",
         "San Jose Earthquakes, 1 pt",
     ]
 

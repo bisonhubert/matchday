@@ -6,7 +6,7 @@ from matchday import dataclasses
 class Matchday1:
     MATCH_RECORD_1 = "San Jose Earthquakes 3, Santa Cruz Slugs 3\n"
     MATCH_RECORD_2 = "Capitola Seahorses 1, Aptos FC 0"
-    MATCH_RECORD_3 = "Felton Lumberjacks 0, Monterey United 2"
+    MATCH_RECORD_3 = "Felton Lumberjacks 2, Monterey United 0"
 
 
 class Matchday2:

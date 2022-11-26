@@ -41,14 +41,14 @@ def test_match_record_parser_3(match_record_3):
     assert parser.match_record == match_record_3
     assert parser.is_valid
     assert parser.team_1_name == "Felton Lumberjacks"
-    assert parser.team_1_goal_count == 0
-    assert parser.team_1_win_count == 0
-    assert parser.team_1_lose_count == 1
+    assert parser.team_1_goal_count == 2
+    assert parser.team_1_win_count == 1
+    assert parser.team_1_lose_count == 0
     assert parser.team_1_draw_count == 0
     assert parser.team_2_name == "Monterey United"
-    assert parser.team_2_goal_count == 2
-    assert parser.team_2_win_count == 1
-    assert parser.team_2_lose_count == 0
+    assert parser.team_2_goal_count == 0
+    assert parser.team_2_win_count == 0
+    assert parser.team_2_lose_count == 1
     assert parser.team_2_draw_count == 0
 
 
