@@ -39,11 +39,11 @@ def test_matchday_interface_1(match_record_1):
     assert len(report) == 3
     assert report[0] == "Matchday 1\n"
     assert report[1] == "San Jose Earthquakes, 1 pt\n"
-    assert report[2] == "Santa Cruz Slugs, 1 pt"
+    assert report[2] == "Santa Cruz Slugs, 1 pt\n"
     assert report == [
         "Matchday 1\n",
         "San Jose Earthquakes, 1 pt\n",
-        "Santa Cruz Slugs, 1 pt",
+        "Santa Cruz Slugs, 1 pt\n",
     ]
 
 
@@ -73,11 +73,11 @@ def test_matchday_interface_2(match_record_2):
     assert len(report) == 3
     assert report[0] == "Matchday 1\n"
     assert report[1] == "Capitola Seahorses, 3 pts\n"
-    assert report[2] == "Aptos FC, 0 pts"
+    assert report[2] == "Aptos FC, 0 pts\n"
     assert report == [
         "Matchday 1\n",
         "Capitola Seahorses, 3 pts\n",
-        "Aptos FC, 0 pts",
+        "Aptos FC, 0 pts\n",
     ]
 
 
@@ -108,11 +108,11 @@ def test_matchday_interface_3(match_record_3):
     assert len(report) == 3
     assert report[0] == "Matchday 1\n"
     assert report[1] == "Felton Lumberjacks, 3 pts\n"
-    assert report[2] == "Monterey United, 0 pts"
+    assert report[2] == "Monterey United, 0 pts\n"
     assert report == [
         "Matchday 1\n",
         "Felton Lumberjacks, 3 pts\n",
-        "Monterey United, 0 pts",
+        "Monterey United, 0 pts\n",
     ]
 
 
@@ -133,12 +133,12 @@ def test_matchday_interface_multiple_teams_1(match_records_1):
     assert report[0] == "Matchday 1\n"
     assert report[1] == "Capitola Seahorses, 3 pts\n"
     assert report[2] == "Felton Lumberjacks, 3 pts\n"
-    assert report[3] == "San Jose Earthquakes, 1 pt"
+    assert report[3] == "San Jose Earthquakes, 1 pt\n"
     assert report == [
         "Matchday 1\n",
         "Capitola Seahorses, 3 pts\n",
         "Felton Lumberjacks, 3 pts\n",
-        "San Jose Earthquakes, 1 pt",
+        "San Jose Earthquakes, 1 pt\n",
     ]
 
 
@@ -159,12 +159,12 @@ def test_matchday_interface_multiple_teams_2(match_records_2):
     assert report[0] == "Matchday 1\n"
     assert report[1] == "Aptos FC, 3 pts\n"
     assert report[2] == "Monterey United, 3 pts\n"
-    assert report[3] == "Capitola Seahorses, 1 pt"
+    assert report[3] == "Capitola Seahorses, 1 pt\n"
     assert report == [
         "Matchday 1\n",
         "Aptos FC, 3 pts\n",
         "Monterey United, 3 pts\n",
-        "Capitola Seahorses, 1 pt",
+        "Capitola Seahorses, 1 pt\n",
     ]
 
 
@@ -185,10 +185,10 @@ def test_matchday_interface_multiple_days(multiple_matchday_records):
     assert report[0] == "Matchday 2\n"
     assert report[1] == "Capitola Seahorses, 4 pts\n"
     assert report[2] == "Aptos FC, 3 pts\n"
-    assert report[3] == "Felton Lumberjacks, 3 pts"
+    assert report[3] == "Felton Lumberjacks, 3 pts\n"
     assert report == [
         "Matchday 2\n",
         "Capitola Seahorses, 4 pts\n",
         "Aptos FC, 3 pts\n",
-        "Felton Lumberjacks, 3 pts",
+        "Felton Lumberjacks, 3 pts\n",
     ]

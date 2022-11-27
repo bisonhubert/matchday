@@ -30,6 +30,10 @@ class Matchday:
     count: int = None
     teams: List[Type[SoccerTeam]] = None
 
+    @property
+    def name(self):
+        return f"Matchday {self.count}"
+
     def _rank_matchday_teams(self) -> List[str]:
         """
         Teams are ranked by points, descending. If points are tied, order by team name asc.
@@ -37,18 +41,11 @@ class Matchday:
         teams = sorted(self.teams, key=attrgetter("name"))
         return sorted(teams, key=attrgetter("points"), reverse=True)
 
-    def _get_full_report(self):
-        report = [f"{self.name}\n"]
-        if self.teams is None:
-            return report
-        return [*report, *self.format_ranked_teams()]
+    def _get_matchday_report(self) -> List[str]:
+        return [f"{team.matchday_report}" for team in self._rank_matchday_teams()]
 
-    @property
-    def name(self):
-        return f"Matchday {self.count}"
-
-    def format_ranked_teams(self) -> List[str]:
-        return [f"{team.matchday_report}\n" for team in self._rank_matchday_teams()]
+    def _print_report(self, report: List[str]) -> str:
+        print(report)
 
     def find_team(self, team_name: str) -> Type[SoccerTeam]:
         if self.teams is None:
@@ -58,12 +55,21 @@ class Matchday:
         )
         return team
 
+    def get_full_report(self, use_newlines: bool = False):
+        if self.teams is None:
+            return [f"{self.name}"]
+        if use_newlines:
+            return [
+                f"{self.name}{chr(10)}",
+                *[f"{report}{chr(10)}" for report in self._get_matchday_report()],
+            ]
+        return [self.name, *self._get_matchday_report()]
+
     def print_report(self) -> List[str]:
-        report = self._get_full_report()
+        report = self.get_full_report(use_newlines=True)
         if len(report) > 4:
             report = report[:4]
-        report[-1] = report[-1].strip()
-        print(report)
+        self._print_report(report)
         return report
 
 
@@ -89,8 +95,8 @@ class League:
             return None
         return self.prev_matchday.find_team(team_name)
 
-    def get_report(self) -> List[str]:
+    def get_report(self, use_newlines: bool = False) -> List[str]:
         report = []
         for matchday in self.matchdays:
-            report = [*report, *matchday._get_full_report()[:4]]
-        return report
+            report = [*report, *matchday.get_full_report(use_newlines=True)[:4], "\n"]
+        return report[:-1]  # do not include the newline at the end
