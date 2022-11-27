@@ -75,6 +75,7 @@ class Matchday:
 @dataclass
 class League:
     matchdays: Set[Type[Matchday]] = None
+    team_count: int = None
 
     @property
     def prev_matchday(self) -> Type[Matchday]:
@@ -92,3 +93,9 @@ class League:
         if self.matchdays is None:
             return None
         return self.prev_matchday.find_team(team_name)
+
+    def get_report(self) -> List[str]:
+        report = []
+        for matchday in self.matchdays:
+            report = [*report, *matchday._get_full_report()[:4]]
+        return report

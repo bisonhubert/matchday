@@ -20,11 +20,24 @@ class MatchdayInterface:
 
     def _update_soccer_team(self, team: dict) -> None:
         prev_team_record = self.league.get_team(team.get("name"))
-        return prev_team_record.update(team)
+        win_count = team.get("win_count") + prev_team_record.win_count
+        lose_count = team.get("lose_count") + prev_team_record.lose_count
+        draw_count = team.get("draw_count") + prev_team_record.draw_count
+        return SoccerTeam(
+            name=team.get("name"),
+            win_count=win_count,
+            lose_count=lose_count,
+            draw_count=draw_count,
+        )
 
-    def _start_new_matchday(self, teams: List[Type[SoccerTeam]]):
+    def _end_matchday(self, teams: List[Type[SoccerTeam]]):
+        if self.matchday.count == 1:
+            self.league.team_count = len(self.matchday.teams)
         self.league.add_matchday(self.matchday)
         self.matchday.print_report()
+
+    def _handle_new_matchday(self, teams: List[Type[SoccerTeam]]):
+        self._end_matchday(teams)
         soccer_teams = [self._update_soccer_team(team) for team in teams]
         self.matchday = Matchday(count=self.matchday.count + 1, teams=soccer_teams)
 
@@ -50,9 +63,17 @@ class MatchdayInterface:
         else:
             return len(self.matchday.teams) == len(self.league.prev_matchday.teams)
 
-    def run(self, teams: List[dict]) -> MatchdayInterface:
-        if self.is_new_matchday(teams):
-            self._start_new_matchday(teams)
+    def run(self, teams: List[dict], is_stream_done: bool) -> MatchdayInterface:
+        if is_stream_done:
+            if self.matchday.count == 1:
+                [self.add_team(team) for team in teams]
+                self.league.team_count = len(self.matchday.teams)
+            else:
+                soccer_teams = [self._update_soccer_team(team) for team in teams]
+                self.matchday.teams = [*self.matchday.teams, *soccer_teams]
+                self._end_matchday(teams)
+        elif self.is_new_matchday(teams):
+            self._handle_new_matchday(teams)
         elif self.matchday.count == 1:
             [self.add_team(team) for team in teams]
         else:

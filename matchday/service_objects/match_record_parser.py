@@ -9,6 +9,7 @@ class MatchRecordParser:
     def __init__(self, match_record: str) -> None:
         self.match_record = match_record
         self.is_valid: bool = False
+        self.is_stream_done: bool = False
         self.team_1_name: str = None
         self.team_2_name: str = None
         self.team_1_goal_count: int = None
@@ -21,6 +22,7 @@ class MatchRecordParser:
         self.team_2_draw_count: int = 0
 
     def _split_teams(self) -> List[str]:
+        self.is_stream_done = not self.match_record.endswith("\n")
         return self.match_record.strip().split(", ")  # split on comma + whitespace
 
     def _get_team_names(self, teams: List[str]) -> str:
