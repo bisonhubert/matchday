@@ -25,9 +25,10 @@ def test_sample_input():
 
     interface = MatchdayInterface()
     sample_input = get_sample_input()
-    for record in sample_input:
+    for indx, record in enumerate(sample_input):
+        is_stream_done = indx + 1 == len(sample_input)
         parser = MatchRecordParser(record).run()
-        interface.run(parser.get_teams(), parser.is_stream_done)
+        interface.run(parser.get_teams(), is_stream_done)
     assert interface.matchday.name == "Matchday 4"
     assert interface.matchday.count == 4
     assert len(interface.matchday.teams) == 6
@@ -35,11 +36,8 @@ def test_sample_input():
         set([team.name for team in interface.matchday.teams])
     )
     report = interface.matchday.print_report()
-    # # test that print() gets called when you run print_report()
+    # test that print() gets called when you run print_report()
     expected_output = get_sample_output()
-    league_report = interface.league.get_report()
-    # todobison
-    ## add newlines between matchdays
-    ## the last groups of teams isn't being added to a matchday
+    league_report = interface.league.get_report(use_newlines=True)
     assert len(expected_output) == len(league_report)
     assert league_report == expected_output

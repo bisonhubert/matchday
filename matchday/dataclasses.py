@@ -57,7 +57,7 @@ class Matchday:
 
     def get_full_report(self, use_newlines: bool = False):
         if self.teams is None:
-            return [f"{self.name}"]
+            return [f"{self.name}\n"]
         if use_newlines:
             return [
                 f"{self.name}{chr(10)}",
