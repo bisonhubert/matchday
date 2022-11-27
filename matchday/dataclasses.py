@@ -8,8 +8,8 @@ from typing import List, Set, Type
 class SoccerTeam:
     name: str = None
     win_count: int = None
-    lose_count: int = None
     draw_count: int = None
+    lose_count: int = None
 
     @property
     def points(self) -> int:
@@ -19,6 +19,10 @@ class SoccerTeam:
     def matchday_report(self) -> str:
         unit = "pt" if self.points == 1 else "pts"
         return f"{self.name}, {self.points} {unit}"
+
+    @property
+    def record(self) -> str:
+        return f"{self.win_count}-{self.draw_count}-{self.lose_count}"
 
     def update(self, team: dict) -> SoccerTeam:
         # from operator import itemgetter
