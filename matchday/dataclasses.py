@@ -45,7 +45,8 @@ class Matchday:
         return [f"{team.matchday_report}" for team in self._rank_matchday_teams()]
 
     def _print_report(self, report: List[str]) -> str:
-        print(report)
+        for report_line in report:
+            print(report_line, end="")
 
     def find_team(self, team_name: str) -> Type[SoccerTeam]:
         if self.teams is None:
@@ -57,18 +58,20 @@ class Matchday:
 
     def get_full_report(self, use_newlines: bool = False):
         if self.teams is None:
-            return [f"{self.name}\n"]
+            return [f"{self.name}"]
         if use_newlines:
             return [
-                f"{self.name}{chr(10)}",
-                *[f"{report}{chr(10)}" for report in self._get_matchday_report()],
+                f"{self.name}\n",
+                *[f"{report}\n" for report in self._get_matchday_report()],
             ]
         return [self.name, *self._get_matchday_report()]
 
-    def print_report(self) -> List[str]:
+    def print_report(self, is_stream_done: bool = False) -> List[str]:
         report = self.get_full_report(use_newlines=True)
         if len(report) > 4:
             report = report[:4]
+            if not is_stream_done:
+                report.append("\n")
         self._print_report(report)
         return report
 
