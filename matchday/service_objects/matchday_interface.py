@@ -72,7 +72,7 @@ class MatchdayInterface:
                 if teams is not None:
                     soccer_teams = [self._update_soccer_team(team) for team in teams]
                     self.matchday.teams = [*self.matchday.teams, *soccer_teams]
-                self._end_matchday(is_stream_done)
+            self._end_matchday(is_stream_done)
         elif self.is_new_matchday(teams):
             self._handle_new_matchday(teams)
         elif self.matchday.count == 1:

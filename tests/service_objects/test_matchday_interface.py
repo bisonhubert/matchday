@@ -9,7 +9,7 @@ def test_matchday_interface_init():
     assert interface.matchday is not None
     assert interface.matchday.name == "Matchday 1"
     assert interface.matchday.count == 1
-    assert interface.matchday.print_report() == ["Matchday 1\n"]
+    assert interface.matchday.print_report() == ["Matchday 1"]
 
 
 def test_matchday_interface_1(match_record_1):
@@ -104,6 +104,7 @@ def test_matchday_interface_3(match_record_3):
 
 
 def test_matchday_interface_multiple_teams_1(match_records_1):
+    is_stream_done = False
     interface = MatchdayInterface()
     for indx, record in enumerate(match_records_1):
         is_stream_done = indx + 1 == len(match_records_1)
@@ -115,7 +116,7 @@ def test_matchday_interface_multiple_teams_1(match_records_1):
     assert len([team.name for team in interface.matchday.teams]) == len(
         set([team.name for team in interface.matchday.teams])
     )
-    report = interface.matchday.print_report()
+    report = interface.matchday.print_report(is_stream_done)
     assert len(report) == 4
     assert report == [
         "Matchday 1\n",
@@ -126,6 +127,7 @@ def test_matchday_interface_multiple_teams_1(match_records_1):
 
 
 def test_matchday_interface_multiple_teams_2(match_records_2):
+    is_stream_done = False
     interface = MatchdayInterface()
     for indx, record in enumerate(match_records_2):
         is_stream_done = indx + 1 == len(match_records_2)
@@ -137,7 +139,7 @@ def test_matchday_interface_multiple_teams_2(match_records_2):
     assert len([team.name for team in interface.matchday.teams]) == len(
         set([team.name for team in interface.matchday.teams])
     )
-    report = interface.matchday.print_report()
+    report = interface.matchday.print_report(is_stream_done)
     assert len(report) == 4
     assert report == [
         "Matchday 1\n",
@@ -148,6 +150,7 @@ def test_matchday_interface_multiple_teams_2(match_records_2):
 
 
 def test_matchday_interface_multiple_days(multiple_matchday_records):
+    is_stream_done = False
     interface = MatchdayInterface()
     for indx, record in enumerate(multiple_matchday_records):
         is_stream_done = indx + 1 == len(multiple_matchday_records)
@@ -159,7 +162,7 @@ def test_matchday_interface_multiple_days(multiple_matchday_records):
     assert len([team.name for team in interface.matchday.teams]) == len(
         set([team.name for team in interface.matchday.teams])
     )
-    report = interface.matchday.print_report()
+    report = interface.matchday.print_report(is_stream_done)
     assert len(report) == 4
     assert report == [
         "Matchday 2\n",
