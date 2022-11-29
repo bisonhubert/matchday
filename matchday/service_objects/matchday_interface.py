@@ -30,14 +30,14 @@ class MatchdayInterface:
             draw_count=draw_count,
         )
 
-    def _end_matchday(self, teams: List[Type[SoccerTeam]]):
+    def _end_matchday(self):
         if self.matchday.count == 1:
             self.league.team_count = len(self.matchday.teams)
         self.league.add_matchday(self.matchday)
         self.matchday.print_report()
 
     def _handle_new_matchday(self, teams: List[Type[SoccerTeam]]):
-        self._end_matchday(teams)
+        self._end_matchday()
         soccer_teams = [self._update_soccer_team(team) for team in teams]
         self.matchday = Matchday(count=self.matchday.count + 1, teams=soccer_teams)
 
@@ -69,9 +69,10 @@ class MatchdayInterface:
                 [self.add_team(team) for team in teams]
                 self.league.team_count = len(self.matchday.teams)
             else:
-                soccer_teams = [self._update_soccer_team(team) for team in teams]
-                self.matchday.teams = [*self.matchday.teams, *soccer_teams]
-                self._end_matchday(teams)
+                if teams is not None:
+                    soccer_teams = [self._update_soccer_team(team) for team in teams]
+                    self.matchday.teams = [*self.matchday.teams, *soccer_teams]
+                self._end_matchday()
         elif self.is_new_matchday(teams):
             self._handle_new_matchday(teams)
         elif self.matchday.count == 1:
