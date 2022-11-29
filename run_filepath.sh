@@ -1,3 +1,3 @@
 #/bin/bash
-
-matchday tests/mock_data/sample-input.txt
+FILEPATH=${1:-tests/mock_data/sample-input.txt}
+matchday $FILEPATH
