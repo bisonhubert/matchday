@@ -1,3 +1,3 @@
 #/bin/bash
 
-cat tests/mock_data/sample-input.txt | matchday
+matchday tests/mock_data/sample-input.txt

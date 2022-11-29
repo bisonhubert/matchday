@@ -15,13 +15,17 @@ def handle_stdin():
         interface.run(parser.get_teams(), is_stream_done)
 
 
-# def handle_filepath(filepath):
-#     print("in handle_filepath")
-#     print(filepath)
-#     while open(filepath) as f:
-#         for match_record in f:
-#             run_matchday(match_record)
-#     print("done")
+def handle_filepath(filepath):
+    file = open(filepath, "r")
+    interface = MatchdayInterface()
+    while 1:
+        match_record = file.readline()
+        is_stream_done = not match_record
+        if is_stream_done:
+            interface.run([], is_stream_done)
+            break
+        parser = MatchRecordParser(match_record).run()
+        interface.run(parser.get_teams(), is_stream_done)
 
 
 def main():
@@ -29,15 +33,8 @@ def main():
     if len(args) == 0:
         handle_stdin()
     else:
-        print("input as a filepath")
         filepath = args[0]
-        # handle_filepath(filepath)
-        # print("in handle_filepath")
-        # print(filepath)
-        # while open(filepath) as f:
-        #     for match_record in f:
-        #         run_matchday(match_record)
-        # print("done")
+        handle_filepath(filepath)
 
 
 if __name__ == "__main__":
