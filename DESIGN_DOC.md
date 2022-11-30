@@ -10,7 +10,8 @@ The CLI application is written in Python and tested using Pytest.
   * [Streaming Input](#streaming-input)
   * [Parsing the Stream Output](#parsing-stream-output)
   * [Main Interface](#main-interface)
-  * [Service Objects and Data Objects](#service-objects-and-data-objects)
+  * [Business Logic as Service Objects](#service-objects)
+  * [Data Objects](#data-objects)
   * [Setup File](#setup-file)
 * [Whiteboard](#whiteboard)
 * [Testing](#testing)
@@ -81,7 +82,7 @@ Santa Cruz Slugs, 1pt
 
 Each team has 1 point from the tie game, and the teams are ordered alphabetically.
 
-### Service Objects and Data Objects <a name="service-objects-and-data-objects"></a>
+### Business Logic as Service Objects <a name="service-objects"></a>
 
 The main interface relies on business logic and data objects to maintain state as the stream persists.
 
@@ -100,6 +101,8 @@ A team's point record increments over time and is determined by these simple rul
 * A winning team earns 3 points
 * A tie score earns each team 1 point
 * A losing team earns 0 points
+
+### Data Objects <a name="data-objects"></a>
 
 The data objects, which will be represented by Python's [dataclasses](https://docs.python.org/3.8/library/dataclasses.html), are used in place of a persistant database or output file. This decision is purely based on project scope, and is intended to be built in such a way that it could scale to use a more permanent record keeping tool (like PostgreSQL or cloud-hosted file storage).
 
