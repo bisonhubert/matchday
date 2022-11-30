@@ -19,7 +19,7 @@ The CLI application is written in Python and tested using Pytest.
 
 The primary components of this program include: 
 
-* A mechanism for streaming input either from stdin or from a file supplied to the command
+* A mechanism for streaming input either from stdin or from a file passed as the first argument to the command
 * A parser that formats the incoming stream data for use with the main program interface
 * An interface for running the program when a new stream of data comes through
 * A series of algorithms that uses dataclasses, collections, and print statements to output matchday results
