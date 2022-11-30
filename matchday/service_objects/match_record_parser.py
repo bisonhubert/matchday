@@ -6,6 +6,37 @@ from matchday.constants import DRAW, LOSE, WIN
 
 
 class MatchRecordParser:
+    """
+    This handles the business logic of transforming an input stream of data.
+
+    Attributes
+    - match_record: the input string of stream data
+    - is_valid: a flag that indicates if the match_record is formatted correctly
+    - is_stream_done: a flag that indicates if the stream has finished
+    - team_1_name: name of the first team in the match_record
+    - team_2_name: name of the second team in the match_record
+    - team_1_goal_count: number of goals scored by the first team
+    - team_2_goal_count: number of goals scored by the second team
+    - team_1_win_count: number of wins earned by the first team
+    - team_2_win_count: number of wins earned by the second team
+    - team_1_lose_count: number of losses earned by the first team
+    - team_2_lose_count: number of losses earned by the second team
+    - team_1_draw_count: number of draws earned by the first team
+    - team_2_draw_count: number of draws earned by the second team
+
+    Private Methods
+    - _split_teams: strips incomming match record and splits it into 2 teams
+    - _get_team_names: returns team names from incoming string
+    - _get_team_goal_count: returns the number of goals for a team
+    - _set_team_record: uses the goal count to determine whether a team won, lost, or tied
+    - _set_attrs: executes above methods and sets MatchRecordParser attributes
+    - _validate: uses a regex to validate the incoming stream data
+
+    Public Methods
+    - get_teams: returns a list of dictionaries, for instantiating a SoccerTeam object
+    - run: validates the stream input and sets attributes or returns self
+    """
+
     def __init__(self, match_record: str) -> None:
         self.match_record = match_record
         self.is_valid: bool = False
@@ -50,7 +81,6 @@ class MatchRecordParser:
         self._set_team_record()
 
     def _validate(self) -> bool:
-        regex = re.compile("([a-zA-Z]+\\s)+\\d,\\s{1}([a-zA-Z]+\\s)+\\d(\\n)?")
         # regex will match with:
         # >= 1 of any single character in the range a-z or A-Z
         # AND any whitespace character
@@ -60,6 +90,7 @@ class MatchRecordParser:
         # AND any whitespace character, followed by
         # FOLLOWED BY any digit
         # FOLLOWED BY zero or one of a newline character
+        regex = re.compile("([a-zA-Z]+\\s)+\\d,\\s{1}([a-zA-Z]+\\s)+\\d(\\n)?")
         self.is_valid = regex.match(self.match_record) is not None
 
     def get_teams(self):

@@ -36,7 +36,6 @@ def test_sample_input():
         set([team.name for team in interface.matchday.teams])
     )
     report = interface.matchday.print_report()
-    # test that print() gets called when you run print_report()
     expected_output = get_sample_output()
     league_report = interface.league.get_report(use_newlines=True)
     assert len(expected_output) == len(league_report)

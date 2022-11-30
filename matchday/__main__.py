@@ -4,6 +4,10 @@ from matchday.service_objects import MatchRecordParser, MatchdayInterface
 
 
 def handle_stdin():
+    """
+    Method that executes the matchday program from input provided by stdin.
+    Sample script execution: $ cat tests/mock_data/sample-input.txt | matchday
+    """
     interface = MatchdayInterface()
     while 1:
         match_record = sys.stdin.readline()
@@ -16,6 +20,10 @@ def handle_stdin():
 
 
 def handle_filepath(filepath):
+    """
+    Method that executes the matchday program from input provided by an argument to a filepath.
+    Sample script execution: $ matchday tests/mock_data/sample-input.txt
+    """
     file = open(filepath, "r")
     interface = MatchdayInterface()
     while 1:
@@ -29,6 +37,9 @@ def handle_filepath(filepath):
 
 
 def main():
+    """
+    Main runner function that handles which type of input to stream.
+    """
     args = sys.argv[1:]
     if len(args) == 0:
         handle_stdin()

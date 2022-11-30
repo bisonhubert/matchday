@@ -5,6 +5,26 @@ from matchday.dataclasses import League, Matchday, SoccerTeam
 
 
 class MatchdayInterface:
+    """
+    A MatchdayInterface handles the creation of League, Matchday, and SoccerTeam objects
+    and is the primary interface for the matchday CLI application.
+
+    Attributes
+    - league: A League object, collects the Matchday objects
+    - matchday: The most recently completed Matchday
+
+    Private Methods
+    - _initialize_soccer_team: creates a new SoccerTeam object
+    - _update_soccer_team: creates a new SoccerTeam object, updated from the previous matchday
+    - _end_matchday: updates a League with team count, matchdays, and prints the report
+    - _handle_new_matchday: handles turnover between matchdays
+
+    Public Methods
+    - add_team: adds SoccerTeam objects to the current Matchday
+    - is_new_matchday: a flag to indicate whether a matchday has concluded
+    - run: this manages how the interface is run, and is executed once per stream input
+    """
+
     def __init__(self) -> None:
         self.league = League()
         self.matchday = Matchday(count=1)

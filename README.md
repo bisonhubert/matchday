@@ -64,18 +64,20 @@ You can run the tests with a command script, using the `pytest` command, or sele
 ./test.sh
 ```
 
-1b. Using pytest
+1b. Running a particular file
+```
+./test.sh tests/test_sample_input.py
+```
+
+1c. Running a single test within a file
+```
+./test.sh tests/service_objects/test_matchday_interface.py::test_matchday_interface_init
+```
+
+1d. You can also just use `pyetst`
 ```
 pytest
-```
-
-1c. Running a particular file
-```
 pytest tests/test_sample_input.py
-```
-
-1d. Running a single test within a file
-```
 pytest tests/service_objects/test_matchday_interface.py::test_matchday_interface_init
 ```
 
