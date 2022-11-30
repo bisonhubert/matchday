@@ -7,4 +7,4 @@
 # - sets what will run when the runnable application is invoked
 # - installs required dependencies
 
-python3 -m pip install -e .
+python3 -m pip install -e . -user
