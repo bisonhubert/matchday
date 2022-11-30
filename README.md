@@ -7,6 +7,7 @@ A command-line application that reads a stream of match results for a soccer lea
 * [Getting Started](#getting-started)
 * [Program Execution](#program-execution)
 * [Running the Tests](#running-the-tests)
+* [Demo](#demo)
 * [Resources](#resources)
 
 ## System Requirements <a name="system-requirements"></a>
@@ -73,12 +74,16 @@ You can run the tests with a command script, using the `pytest` command, or sele
 ./test.sh tests/service_objects/test_matchday_interface.py::test_matchday_interface_init
 ```
 
-1d. You can also just use `pyetst`
+1d. You can also just use `pytest`
 ```
 pytest
 pytest tests/test_sample_input.py
 pytest tests/service_objects/test_matchday_interface.py::test_matchday_interface_init
 ```
+
+## Demo <a name="demo"></a>
+
+![program-demo](./assets/demo.gif)
 
 ## Resources <a name="resources"></a>
 * [Project Requirements](./PROMPT.md)
