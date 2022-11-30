@@ -7,6 +7,11 @@ The CLI application is written in Python and tested using Pytest.
 ## Table of Contents
 
 * [Primary Components](#primary-components)
+  * [Streaming Input](#streaming-input)
+  * [Parsing Input](#parsing-input)
+  * [Main Interface](#main-interface)
+  * [Business Logic and Data Objects](#business-logic-and-data-objects)
+  * [Setup File](#setup-file)
 * [Whiteboard](#whiteboard)
 * [Testing](#testing)
 
@@ -20,11 +25,11 @@ The primary components of this program include:
 * A series of algorithms that uses dataclasses, collections, and print statements to output matchday results
 * A setup file that installs the `matchday` command
 
-### Streaming Input
+### Streaming Input <a name="streaming-input"></a>
 
 The product specifications list two different streams of input: piped to stdin and a file. Python has builtins for handling streaming inputs, and this will be leveraged for both input types. The `sys.stdin.readline()` and the `file.readline()` methods can be put in an infinite loop, and a `break` statement can be added to terminate the program execution when a specific criteria is met. The ideal criteria for this is when the stream inputs `None`.
 
-### Parsing the Input
+### Parsing the Input <a name="parsing-input"></a>
 
 The input is formatted as lines of strings representing match records for soccer games. The program must derive the number of teams in a league from the input, and it depends on specific string formatting to determine not just the team names, but their scores. Here is a sample line of input:
 
@@ -53,7 +58,7 @@ When parsing the input, the expected output should include:
 * The two team scores
 * The win, loss, or draw count for each team
 
-### Main Interface
+### Main Interface <a name="main-interface"></a>
 
 Once the incoming data stream is validated and parsed to a machine readable format, it gets input to an interface that executes the program for every new line of data coming in from the stream. This interface has to:
 
@@ -72,7 +77,7 @@ Santa Cruz Slugs, 1pt
 
 Each team has 1 point from the tie game, and the teams are ordered alphabetically.
 
-### Business Logic and Data Objects
+### Business Logic and Data Objects <a name="business-logic-and-data-objects"></a>
 
 The main interface relies on business logic and data objects to maintain state as the stream persists.
 
@@ -99,7 +104,7 @@ The data objects required by this program include:
 * A matchday, which has many soccer teams, a count, and a way to lookup teams
 * A league, which is a collection of matchdays. It would be nice to also know how many teams belong to a league for validation and testing purposes
 
-### Setup File
+### Setup File <a name="setup-file"></a>
 
 This is a command-line application, and as such will require a setup file to install dependencies, create the `matchday` command, and link it to the main function which runs the program
 
