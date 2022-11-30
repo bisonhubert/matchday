@@ -11,7 +11,7 @@ A command-line application that reads a stream of match results for a soccer lea
 * [Resources](#resources)
 
 ## System Requirements <a name="system-requirements"></a>
-`matchday` was built and tested in an OS X environment running Python 3.8.4. It requires Python 3.7+.
+`matchday` was built and tested in an OS X environment running Python 3.8.4. It requires Python 3.
 
 ## Getting Started <a name="getting-started"></a>
 Clone the repo and install dependencies.
@@ -43,7 +43,6 @@ cat <path-to-file> | matchday
 ```
 ./run_filepath.sh
 ```
-
 2b. Filepath script using your own file
 ```
 ./run_filepath.sh <path-to-file>
