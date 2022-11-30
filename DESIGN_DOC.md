@@ -7,6 +7,7 @@ The CLI application is written in Python and tested using Pytest.
 ## Table of Contents
 
 * [Primary Components](#primary-components)
+* [Whiteboard](#whiteboard)
 * [Testing](#testing)
 
 ## Primary Components <a name="primary-components"></a>
@@ -18,10 +19,6 @@ The primary components of this program include:
 * An interface for running the program when a new stream of data comes through
 * A series of algorithms that uses dataclasses, collections, and print statements to output matchday results
 * A setup file that installs the `matchday` command
-
-### Visual Overview
-
-todobison add a pic of the whiteboard
 
 ### Streaming Input
 
@@ -105,6 +102,10 @@ The data objects required by this program include:
 ### Setup File
 
 This is a command-line application, and as such will require a setup file to install dependencies, create the `matchday` command, and link it to the main function which runs the program
+
+## Whiteboard <a name="whiteboard"></a>
+
+![whiteboard-of-program](./assets/whiteboard.jpg)
 
 ## Testing <a name="testing"></a>
 

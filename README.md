@@ -88,6 +88,7 @@ pytest tests/service_objects/test_matchday_interface.py::test_matchday_interface
 ## Resources <a name="resources"></a>
 * [Project Requirements](./PROMPT.md)
 * [Design Doc](./DESIGN_DOC.md)
+* [Whiteboard](https://github.com/bisonhubert/matchday/blob/main/DESIGN_DOC.md#whiteboard)
 * [Python's dataclasses library](https://docs.python.org/3.8/library/dataclasses.html)
 * [Rubular](https://rubular.com/), a regex editor
 * [Black](https://github.com/psf/black), a Python code formatter
