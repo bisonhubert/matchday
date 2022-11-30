@@ -15,8 +15,7 @@ A command-line application that reads a stream of match results for a soccer lea
 ## Getting Started <a name="getting-started"></a>
 Clone the repo and install dependencies.
 ```
-git clone ssh-to-github
-./install.sh
+git clone git@github.com:bisonhubert/matchday.git && ./install.sh
 ```
 
 ## Program Execution <a name="program-execution"></a>
