@@ -54,7 +54,7 @@ matchday <path-to-file>
 ```
 
 ## Running the Tests <a name="running-the-tests"></a>
-Tests are written using `pytest`, which is included in the install script. If you see an error complaining that `pytest` is missing, be sure to rerun `./install.sh`.
+Tests are written using `pytest`, which is included in the install script. If you see an error complaining that `pytest` is missing, make sure you have installed the dependency using `./install.sh`.
 
 You can run the tests with a command script, using the `pytest` command, or selecting fiels and tests to run individually.
 
