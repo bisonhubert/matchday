@@ -13,5 +13,5 @@ def test_initialize_league():
     assert league.add_matchday(matchday) is None
     assert len(league.matchdays) == 1
     assert matchday in league.matchdays
-    assert league.get_team('team does not exist') is None
+    assert league.get_team("team does not exist") is None
     assert len(league.get_report()) == 1

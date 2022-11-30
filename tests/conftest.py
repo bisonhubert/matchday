@@ -90,3 +90,44 @@ def invalid_match_records():
         format_match_record(INVALID_MATCH_RECORD_9),
         INVALID_MATCH_RECORD_10,
     ]
+
+
+@pytest.fixture
+def soccer_team_1():
+    return dataclasses.SoccerTeam(
+        name="San Jose Earthquakes",
+        win_count=1,
+        draw_count=1,
+        lose_count=1,
+    )
+
+
+@pytest.fixture
+def soccer_team_2():
+    return dataclasses.SoccerTeam(
+        name="Santa Cruz Slugs", win_count=0, draw_count=1, lose_count=0
+    )
+
+
+@pytest.fixture
+def soccer_team_3():
+    return dataclasses.SoccerTeam(
+        name="Capitola Seahorses", win_count=0, draw_count=0, lose_count=1
+    )
+
+
+@pytest.fixture
+def soccer_team_4():
+    return dataclasses.SoccerTeam(
+        name="Aptos FC", win_count=1, draw_count=0, lose_count=0
+    )
+
+
+@pytest.fixture
+def matchday_1(soccer_team_1, soccer_team_2):
+    return dataclasses.Matchday(count=1, teams=[soccer_team_1, soccer_team_2])
+
+
+@pytest.fixture
+def matchday_2(soccer_team_3, soccer_team_4):
+    return dataclasses.Matchday(count=2, teams=[soccer_team_4, soccer_team_3])

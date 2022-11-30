@@ -22,9 +22,9 @@ class SoccerTeam:
     """
 
     name: str = None
-    win_count: int = None
-    draw_count: int = None
-    lose_count: int = None
+    win_count: int = 0
+    draw_count: int = 0
+    lose_count: int = 0
 
     @property
     def points(self) -> int:
@@ -77,10 +77,14 @@ class Matchday:
         """
         Teams are ranked by points, descending. If points are tied, order by team name asc.
         """
+        if self.teams is None:
+            return None
         teams = sorted(self.teams, key=attrgetter("name"))
         return sorted(teams, key=attrgetter("points"), reverse=True)
 
-    def _print_report(self, report: List[str]) -> str:
+    def _print_report(self, report: List[str] = None) -> str:
+        if report is None:
+            return None
         for report_line in report:
             print(report_line, end="")
 
@@ -113,6 +117,8 @@ class Matchday:
 
     def print_report(self, is_stream_done: bool = False) -> List[str]:
         report = self.get_full_report(use_newlines=True)
+        if report is None:
+            return None
         if len(report) > 4:
             report = report[:4]
             if not is_stream_done:
